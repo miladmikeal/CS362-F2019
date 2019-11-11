@@ -685,7 +685,8 @@ int baronEffect(struct gameState *state, int choice1, int currentPlayer) {
     currentPlayer = 0;
     state->numBuys++;//Increase buys by 1!
     if (choice1 > 0) { //Boolean true or going to discard an estate
-        int p;//Iterator for hand!
+//        int p;//Iterator for hand!
+        int p = 0;
         int card_not_discarded = 1;//Flag for discard set!
         while(card_not_discarded) {
             if (state->hand[currentPlayer][p] == estate) { //Found an estate card!
@@ -743,6 +744,8 @@ int minionEffect(struct gameState *state, int choice1, int choice2, int handPos,
     //discard card from hand
     discardCard(handPos, currentPlayer, state, 0);
 
+    int numCardsDrawn = 0;
+
     if (choice1)
     {
         state->coins = state->coins + 2;
@@ -756,9 +759,10 @@ int minionEffect(struct gameState *state, int choice1, int choice2, int handPos,
         }
 
         //draw 4
-        for (i = 1; i < 4; i++)
+        for (i = 1  ; i < 4; i++)
         {
             drawCard(currentPlayer, state);
+            numCardsDrawn++;
         }
 
         //other players discard hand and redraw if hand size > 4
@@ -784,7 +788,7 @@ int minionEffect(struct gameState *state, int choice1, int choice2, int handPos,
         }
 
     }
-    return 0;
+    return numCardsDrawn;
 }
 
 int ambassadorEffect(struct gameState *state, int choice1, int choice2, int handPos, int i, int j, int currentPlayer) {
@@ -797,6 +801,8 @@ int ambassadorEffect(struct gameState *state, int choice1, int choice2, int hand
     {
         return -1;
     }
+
+    int jPlaceholder = j;
 
     for (i = 0; i < state->handCount[currentPlayer]; i++)
     {
@@ -841,11 +847,12 @@ int ambassadorEffect(struct gameState *state, int choice1, int choice2, int hand
         }
     }
 
-    return 0;
+    return jPlaceholder;
 }
 
 int tributeEffect(struct gameState *state, int tributeRevealedCards[], int i, int currentPlayer, int nextPlayer) {
     nextPlayer = 0;
+    int nextPlayerReturn = nextPlayer;
     if ((state->discardCount[nextPlayer] + state->deckCount[nextPlayer]) <= 1) {
         if (state->deckCount[nextPlayer] > 0) {
             tributeRevealedCards[0] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
@@ -902,7 +909,7 @@ int tributeEffect(struct gameState *state, int tributeRevealedCards[], int i, in
         }
     }
 
-    return 0;
+    return nextPlayerReturn;
 }
 
 int mineEffect(struct gameState *state, int choice1, int choice2, int handPos, int i, int j, int currentPlayer) {
@@ -928,16 +935,18 @@ int mineEffect(struct gameState *state, int choice1, int choice2, int handPos, i
     //discard card from hand
     discardCard(handPos, currentPlayer, state, 0);
 
+    int numCardsDiscarded = 0;
     //discard trashed card
     for (i = 0; i < state->handCount[currentPlayer]; i++)
     {
         if (state->hand[currentPlayer][i] == j)
         {
+            numCardsDiscarded++;
             discardCard(i, currentPlayer, state, 0);
         }
     }
 
-    return 0;
+    return numCardsDiscarded;
 }
 
 int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState *state, int handPos, int *bonus)
