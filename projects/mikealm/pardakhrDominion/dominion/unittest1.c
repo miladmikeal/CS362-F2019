@@ -8,9 +8,10 @@
 #include <stdlib.h>
 #include <assert.h>
 
-int main() {
+int main()
+{
     // set your card array
-    int k[10] = { adventurer, council_room, feast, gardens, mine, remodel, smithy, village, baron, great_hall };
+    int k[10] = {adventurer, council_room, feast, gardens, mine, remodel, smithy, village, baron, great_hall};
     // declare the game state
     struct gameState G;
     // declare the arrays
@@ -25,27 +26,33 @@ int main() {
     int p = 0;
     int handCount = 4;
     memset(&G, 23, sizeof(struct gameState)); // set the game state
-    initializeGame(2, k, 10, &G); // initialize a new game
-    G.handCount[p] = handCount; // set any other variables
+    initializeGame(2, k, 10, &G);             // initialize a new game
+    G.handCount[p] = handCount;               // set any other variables
     memcpy(G.hand[p], coppers, sizeof(int) * handCount);
     // call the refactored function
     printf("currentPlayer before baronEffect: %d\n", G.whoseTurn);
     printf("supplyCount for estate before baronEffect: %d\n", G.supplyCount[estate]);
-    baronEffect(&G, 0, 1);
+    baronCardEffect(0, 0, &G);
     endTurn(&G);
     // verify that your asserts pass, for the bugs your asserts may fail
     printf("currentPlayer should be 1\n");
     printf("currentPlayer is: %d\n", G.whoseTurn);
-    if (G.whoseTurn == 1) {
+    if (G.whoseTurn == 1)
+    {
         printf("Test passed\n");
-    } else {
+    }
+    else
+    {
         printf("Test failed\n");
     }
     printf("supplyCount for estate should be 7\n");
     printf("supplyCount for estate is: %d\n", G.supplyCount[estate]);
-    if (G.supplyCount[estate] == 7) {
+    if (G.supplyCount[estate] == 7)
+    {
         printf("Test passed\n");
-    } else {
+    }
+    else
+    {
         printf("Test failed\n");
     }
 

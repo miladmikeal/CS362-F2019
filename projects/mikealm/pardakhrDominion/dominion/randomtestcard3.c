@@ -68,7 +68,7 @@ int main(int argc, char *argv[]) {
 
         memcpy(&G2, &G1, sizeof(struct gameState));
 
-        tributeEffect(&G1, 0, 1);
+        tributeEffect(0, 1, &G1);
 
         testNum++;
         printf("Test Number: %d\n", testNum);

@@ -64,7 +64,7 @@ int main(int argc, char *argv[]) {
 
         memcpy(&G2, &G1, sizeof(struct gameState));
 
-        baronEffect(&G1, choice, 0);
+        baronCardEffect(choice, 0, &G1);
 
         testNum++;
         printf("Test Number: %d \nHand Count = %d \nEstate Supply Count = %d \nPlayer has estate: %d \nChoice Number: %d\n", testNum, handCount, estateCount, haveEstate, choice);

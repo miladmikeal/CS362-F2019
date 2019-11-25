@@ -31,7 +31,7 @@ int main() {
     // call the refactored function
     printf("currentPlayer before minionEffect: %d\n", G.whoseTurn);
     printf("handCount for currentPlayer before minionEffect: %d\n", G.handCount[G.whoseTurn]);
-    int drawnCards = minionEffect(&G, 0, 1, 2, 0, 0, G.whoseTurn);
+    int drawnCards = minionEffect(1, 0, 0, &G, 0);
     endTurn(&G);
     // verify that your asserts pass, for the bugs your asserts may fail
     printf("currentPlayer should be 1\n");

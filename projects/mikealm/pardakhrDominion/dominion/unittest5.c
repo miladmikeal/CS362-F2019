@@ -32,7 +32,7 @@ int main() {
     printf("currentPlayer before mineEffect: %d\n", G.whoseTurn);
     int j = 2;
     printf("handCount for currentPlayer before mineEffect: %d\n", G.handCount[G.whoseTurn]);
-    int numCardsDiscarded = mineEffect(&G, 0, 1, 2, 0, j, G.whoseTurn);
+    int numCardsDiscarded = mineEffect(1, gold, 0, &G, 0);
     endTurn(&G);
     // verify that your asserts pass, for the bugs your asserts may fail
     printf("currentPlayer should be 1\n");

@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
 
         memcpy(&G2, &G1, sizeof(struct gameState));
 
-        minionEffect(&G1, choice1, choice2, 0, 0);
+        minionEffect(choice1, choice2, 0, &G1, 0);
 
         testNum++;
         printf("Test Number: %d \nChoice Number 1 = %d \nChoice Number 2 = %d\n", testNum, choice1, choice2);

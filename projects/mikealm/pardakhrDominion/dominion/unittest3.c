@@ -32,7 +32,7 @@ int main() {
     printf("currentPlayer before ambassadorEffect: %d\n", G.whoseTurn);
     int j = 2;
     printf("handCount for currentPlayer before ambassadorEffect: %d\n", G.handCount[G.whoseTurn]);
-    int jReturn = ambassadorEffect(&G, 0, 1, 2, 0, j, G.whoseTurn);
+    int jReturn = ambassadorEffect(1, 0, 0, &G, 0);
     endTurn(&G);
     // verify that your asserts pass, for the bugs your asserts may fail
     printf("currentPlayer should be 1\n");

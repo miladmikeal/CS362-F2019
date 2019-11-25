@@ -33,7 +33,7 @@ int main() {
     int nextPlayer = G.whoseTurn + 1;
     int tributeCardsRevealed[10];
     printf("handCount for currentPlayer before tributeEffect: %d\n", G.handCount[G.whoseTurn]);
-    int nextPlayerReturned = tributeEffect(&G, tributeCardsRevealed, 0, 0, G.whoseTurn, nextPlayer);
+    int nextPlayerReturned = tributeEffect(0, 1, &G);
     endTurn(&G);
     // verify that your asserts pass, for the bugs your asserts may fail
     printf("currentPlayer should be 1\n");
