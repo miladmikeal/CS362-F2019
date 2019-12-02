@@ -33,25 +33,27 @@ int main(int argc, char *argv[])
   // Kingdom card array
   int k[10] = {adventurer, council_room, feast, gardens, mine, remodel, smithy, village, baron, great_hall};
 
-  printf("\n***** Unit Test - Bug 1: *****\n");
+  printf("\n***** Unit Test - Bug 3: *****\n");
 
   // Setup: initialize game state, player and cards
   memset(&G1, 23, sizeof(struct gameState));
   memset(&G2, 23, sizeof(struct gameState));
   initializeGame(numPlayers, k, seed, &G1);
 
-  int deckCountBefore = G1.deckCount[player];
-  int handCountBefore = G1.handCount[player];
-  int discardCountBefore = G1.discardCount[player];
   int bonus;
+  
+  G1.hand[player][0] = remodel;
+  G1.hand[player][1] = duchy;
+  G1.handCount[player] = 2;
+  G1.discard[player][1] = -1;
+  G1.discard[player][0] = -1;
+  G1.discardCount[player] = 0;
 
-  cardEffect(mine, 4, gold, 0, &G1, 0, &bonus);
+  cardEffect(remodel, 1, gold, 0, &G1, 0, &bonus);
 
-  myAssert("Deck count the same", (deckCountBefore == G1.deckCount[player]));
-  myAssert("Hand count has one less", (handCountBefore - 1 == G1.handCount[player]));
-  myAssert("Discard count has one more", (discardCountBefore - 1 == G1.discardCount[player]));
+  myAssert("Can trash duchy for gold", G1.discard[player][0] == gold || G1.discard[player][0] == gold);
 
   printf("\n\n");
-
+  
   return 0;
 }

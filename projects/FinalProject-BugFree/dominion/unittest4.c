@@ -33,25 +33,26 @@ int main(int argc, char *argv[])
   // Kingdom card array
   int k[10] = {adventurer, council_room, feast, gardens, mine, remodel, smithy, village, baron, great_hall};
 
-  printf("\n***** Unit Test - Bug 1: *****\n");
+  printf("\n***** Unit Test - Bug 4: *****\n");
 
   // Setup: initialize game state, player and cards
   memset(&G1, 23, sizeof(struct gameState));
   memset(&G2, 23, sizeof(struct gameState));
   initializeGame(numPlayers, k, seed, &G1);
 
-  int deckCountBefore = G1.deckCount[player];
-  int handCountBefore = G1.handCount[player];
-  int discardCountBefore = G1.discardCount[player];
   int bonus;
+  
+  int isGameOverBefore = isGameOver(&G1);
 
-  cardEffect(mine, 4, gold, 0, &G1, 0, &bonus);
+  G1.supplyCount[treasure_map] = 0;
+  G1.supplyCount[sea_hag] = 0;
+  G1.supplyCount[mine] = 0;
 
-  myAssert("Deck count the same", (deckCountBefore == G1.deckCount[player]));
-  myAssert("Hand count has one less", (handCountBefore - 1 == G1.handCount[player]));
-  myAssert("Discard count has one more", (discardCountBefore - 1 == G1.discardCount[player]));
+  int isGameOverAfter = isGameOver(&G1);
+
+  myAssert("Game is over", (isGameOverBefore == 0 && isGameOverAfter == 1));
 
   printf("\n\n");
-
+  
   return 0;
 }
